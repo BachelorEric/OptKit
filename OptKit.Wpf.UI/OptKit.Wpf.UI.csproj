@@ -36,6 +36,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
     <Reference Include="System.Windows.Interactivity">
       <HintPath>Lib\System.Windows.Interactivity.dll</HintPath>
@@ -49,11 +50,33 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="AvalonEdit\CodeCompletion\CompletionList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AvalonEdit\CodeCompletion\InsightWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AvalonEdit\Search\DropDownButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AvalonEdit\Search\SearchPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="AvalonEdit\TextEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\MetroNavigationWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -473,6 +496,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Themes\AvalonEdit\generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Themes\Badged.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -626,6 +653,219 @@
     <Compile Include="Actions\CloseFlyoutAction.cs" />
     <Compile Include="Actions\CloseTabItemAction.cs" />
     <Compile Include="Actions\CommandTriggerAction.cs" />
+    <Compile Include="AvalonEdit\AvalonEditCommands.cs" />
+    <Compile Include="AvalonEdit\CodeCompletion\CompletionList.cs" />
+    <Compile Include="AvalonEdit\CodeCompletion\CompletionListBox.cs" />
+    <Compile Include="AvalonEdit\CodeCompletion\CompletionWindow.cs" />
+    <Compile Include="AvalonEdit\CodeCompletion\CompletionWindowBase.cs" />
+    <Compile Include="AvalonEdit\CodeCompletion\ICompletionData.cs" />
+    <Compile Include="AvalonEdit\CodeCompletion\InsightWindow.cs" />
+    <Compile Include="AvalonEdit\CodeCompletion\IOverloadProvider.cs" />
+    <Compile Include="AvalonEdit\CodeCompletion\OverloadInsightWindow.cs" />
+    <Compile Include="AvalonEdit\CodeCompletion\OverloadViewer.cs" />
+    <Compile Include="AvalonEdit\Document\DocumentChangeEventArgs.cs" />
+    <Compile Include="AvalonEdit\Document\DocumentChangeOperation.cs" />
+    <Compile Include="AvalonEdit\Document\DocumentLine.cs" />
+    <Compile Include="AvalonEdit\Document\DocumentLineTree.cs" />
+    <Compile Include="AvalonEdit\Document\DocumentTextWriter.cs" />
+    <Compile Include="AvalonEdit\Document\GapTextBuffer.cs" />
+    <Compile Include="AvalonEdit\Document\IDocument.cs" />
+    <Compile Include="AvalonEdit\Document\ILineTracker.cs" />
+    <Compile Include="AvalonEdit\Document\ITextAnchor.cs" />
+    <Compile Include="AvalonEdit\Document\ITextSource.cs" />
+    <Compile Include="AvalonEdit\Document\IUndoableOperation.cs" />
+    <Compile Include="AvalonEdit\Document\LineManager.cs" />
+    <Compile Include="AvalonEdit\Document\LineNode.cs" />
+    <Compile Include="AvalonEdit\Document\NewLineFinder.cs" />
+    <Compile Include="AvalonEdit\Document\OffsetChangeMap.cs" />
+    <Compile Include="AvalonEdit\Document\RopeTextSource.cs" />
+    <Compile Include="AvalonEdit\Document\SimpleSegment.cs" />
+    <Compile Include="AvalonEdit\Document\TextAnchor.cs" />
+    <Compile Include="AvalonEdit\Document\TextAnchorNode.cs" />
+    <Compile Include="AvalonEdit\Document\TextAnchorTree.cs" />
+    <Compile Include="AvalonEdit\Document\TextDocument.cs" />
+    <Compile Include="AvalonEdit\Document\TextDocumentWeakEventManager.cs" />
+    <Compile Include="AvalonEdit\Document\TextLocation.cs" />
+    <Compile Include="AvalonEdit\Document\TextSegment.cs" />
+    <Compile Include="AvalonEdit\Document\TextSegmentCollection.cs" />
+    <Compile Include="AvalonEdit\Document\TextSourceVersionProvider.cs" />
+    <Compile Include="AvalonEdit\Document\TextUtilities.cs" />
+    <Compile Include="AvalonEdit\Document\UndoOperationGroup.cs" />
+    <Compile Include="AvalonEdit\Document\UndoStack.cs" />
+    <Compile Include="AvalonEdit\Document\WeakLineTracker.cs" />
+    <Compile Include="AvalonEdit\Editing\AbstractMargin.cs" />
+    <Compile Include="AvalonEdit\Editing\Caret.cs" />
+    <Compile Include="AvalonEdit\Editing\CaretLayer.cs" />
+    <Compile Include="AvalonEdit\Editing\CaretNavigationCommandHandler.cs" />
+    <Compile Include="AvalonEdit\Editing\CaretWeakEventHandler.cs" />
+    <Compile Include="AvalonEdit\Editing\DottedLineMargin.cs" />
+    <Compile Include="AvalonEdit\Editing\DragDropException.cs" />
+    <Compile Include="AvalonEdit\Editing\EditingCommandHandler.cs" />
+    <Compile Include="AvalonEdit\Editing\EmptySelection.cs" />
+    <Compile Include="AvalonEdit\Editing\ImeNativeWrapper.cs" />
+    <Compile Include="AvalonEdit\Editing\ImeSupport.cs" />
+    <Compile Include="AvalonEdit\Editing\IReadOnlySectionProvider.cs" />
+    <Compile Include="AvalonEdit\Editing\LineNumberMargin.cs" />
+    <Compile Include="AvalonEdit\Editing\MouseSelectionMode.cs" />
+    <Compile Include="AvalonEdit\Editing\NoReadOnlySections.cs" />
+    <Compile Include="AvalonEdit\Editing\RectangleSelection.cs" />
+    <Compile Include="AvalonEdit\Editing\Selection.cs" />
+    <Compile Include="AvalonEdit\Editing\SelectionColorizer.cs" />
+    <Compile Include="AvalonEdit\Editing\SelectionLayer.cs" />
+    <Compile Include="AvalonEdit\Editing\SelectionMouseHandler.cs" />
+    <Compile Include="AvalonEdit\Editing\SelectionSegment.cs" />
+    <Compile Include="AvalonEdit\Editing\SimpleSelection.cs" />
+    <Compile Include="AvalonEdit\Editing\TextArea.cs" />
+    <Compile Include="AvalonEdit\Editing\TextAreaAutomationPeer.cs" />
+    <Compile Include="AvalonEdit\Editing\TextAreaDefaultInputHandlers.cs" />
+    <Compile Include="AvalonEdit\Editing\TextAreaInputHandler.cs" />
+    <Compile Include="AvalonEdit\Editing\TextRangeProvider.cs" />
+    <Compile Include="AvalonEdit\Editing\TextSegmentReadOnlySectionProvider.cs" />
+    <Compile Include="AvalonEdit\Folding\FoldingElementGenerator.cs" />
+    <Compile Include="AvalonEdit\Folding\FoldingManager.cs" />
+    <Compile Include="AvalonEdit\Folding\FoldingMargin.cs" />
+    <Compile Include="AvalonEdit\Folding\FoldingMarginMarker.cs" />
+    <Compile Include="AvalonEdit\Folding\FoldingSection.cs" />
+    <Compile Include="AvalonEdit\Folding\NewFolding.cs" />
+    <Compile Include="AvalonEdit\Folding\XmlFoldingStrategy.cs" />
+    <Compile Include="AvalonEdit\Highlighting\DocumentHighlighter.cs" />
+    <Compile Include="AvalonEdit\Highlighting\HighlightedInlineBuilder.cs" />
+    <Compile Include="AvalonEdit\Highlighting\HighlightedLine.cs" />
+    <Compile Include="AvalonEdit\Highlighting\HighlightedSection.cs" />
+    <Compile Include="AvalonEdit\Highlighting\HighlightingBrush.cs" />
+    <Compile Include="AvalonEdit\Highlighting\HighlightingColor.cs" />
+    <Compile Include="AvalonEdit\Highlighting\HighlightingColorizer.cs" />
+    <Compile Include="AvalonEdit\Highlighting\HighlightingDefinitionInvalidException.cs" />
+    <Compile Include="AvalonEdit\Highlighting\HighlightingDefinitionTypeConverter.cs" />
+    <Compile Include="AvalonEdit\Highlighting\HighlightingEngine.cs" />
+    <Compile Include="AvalonEdit\Highlighting\HighlightingManager.cs" />
+    <Compile Include="AvalonEdit\Highlighting\HighlightingRule.cs" />
+    <Compile Include="AvalonEdit\Highlighting\HighlightingRuleSet.cs" />
+    <Compile Include="AvalonEdit\Highlighting\HighlightingSpan.cs" />
+    <Compile Include="AvalonEdit\Highlighting\HtmlClipboard.cs" />
+    <Compile Include="AvalonEdit\Highlighting\HtmlOptions.cs" />
+    <Compile Include="AvalonEdit\Highlighting\HtmlRichTextWriter.cs" />
+    <Compile Include="AvalonEdit\Highlighting\IHighlighter.cs" />
+    <Compile Include="AvalonEdit\Highlighting\IHighlightingDefinition.cs" />
+    <Compile Include="AvalonEdit\Highlighting\IHighlightingDefinitionReferenceResolver.cs" />
+    <Compile Include="AvalonEdit\Highlighting\Resources\Resources.cs" />
+    <Compile Include="AvalonEdit\Highlighting\RichText.cs" />
+    <Compile Include="AvalonEdit\Highlighting\RichTextColorizer.cs" />
+    <Compile Include="AvalonEdit\Highlighting\RichTextModel.cs" />
+    <Compile Include="AvalonEdit\Highlighting\RichTextModelWriter.cs" />
+    <Compile Include="AvalonEdit\Highlighting\Xshd\HighlightingLoader.cs" />
+    <Compile Include="AvalonEdit\Highlighting\Xshd\IXshdVisitor.cs" />
+    <Compile Include="AvalonEdit\Highlighting\Xshd\SaveXshdVisitor.cs" />
+    <Compile Include="AvalonEdit\Highlighting\Xshd\V1Loader.cs" />
+    <Compile Include="AvalonEdit\Highlighting\Xshd\V2Loader.cs" />
+    <Compile Include="AvalonEdit\Highlighting\Xshd\XmlHighlightingDefinition.cs" />
+    <Compile Include="AvalonEdit\Highlighting\Xshd\XshdColor.cs" />
+    <Compile Include="AvalonEdit\Highlighting\Xshd\XshdElement.cs" />
+    <Compile Include="AvalonEdit\Highlighting\Xshd\XshdImport.cs" />
+    <Compile Include="AvalonEdit\Highlighting\Xshd\XshdKeywords.cs" />
+    <Compile Include="AvalonEdit\Highlighting\Xshd\XshdProperty.cs" />
+    <Compile Include="AvalonEdit\Highlighting\Xshd\XshdReference.cs" />
+    <Compile Include="AvalonEdit\Highlighting\Xshd\XshdRule.cs" />
+    <Compile Include="AvalonEdit\Highlighting\Xshd\XshdRuleSet.cs" />
+    <Compile Include="AvalonEdit\Highlighting\Xshd\XshdSpan.cs" />
+    <Compile Include="AvalonEdit\Highlighting\Xshd\XshdSyntaxDefinition.cs" />
+    <Compile Include="AvalonEdit\Indentation\CSharp\CSharpIndentationStrategy.cs" />
+    <Compile Include="AvalonEdit\Indentation\CSharp\DocumentAccessor.cs" />
+    <Compile Include="AvalonEdit\Indentation\CSharp\IndentationReformatter.cs" />
+    <Compile Include="AvalonEdit\Indentation\DefaultIndentationStrategy.cs" />
+    <Compile Include="AvalonEdit\Indentation\IIndentationStrategy.cs" />
+    <Compile Include="AvalonEdit\Rendering\BackgroundGeometryBuilder.cs" />
+    <Compile Include="AvalonEdit\Rendering\CollapsedLineSection.cs" />
+    <Compile Include="AvalonEdit\Rendering\ColorizingTransformer.cs" />
+    <Compile Include="AvalonEdit\Rendering\ColumnRulerRenderer.cs" />
+    <Compile Include="AvalonEdit\Rendering\CurrentLineHighlightRenderer.cs" />
+    <Compile Include="AvalonEdit\Rendering\DefaultTextRunTypographyProperties.cs" />
+    <Compile Include="AvalonEdit\Rendering\DocumentColorizingTransformer.cs" />
+    <Compile Include="AvalonEdit\Rendering\FormattedTextElement.cs" />
+    <Compile Include="AvalonEdit\Rendering\GlobalTextRunProperties.cs" />
+    <Compile Include="AvalonEdit\Rendering\HeightTree.cs" />
+    <Compile Include="AvalonEdit\Rendering\HeightTreeLineNode.cs" />
+    <Compile Include="AvalonEdit\Rendering\HeightTreeNode.cs" />
+    <Compile Include="AvalonEdit\Rendering\IBackgroundRenderer.cs" />
+    <Compile Include="AvalonEdit\Rendering\InlineObjectRun.cs" />
+    <Compile Include="AvalonEdit\Rendering\ITextRunConstructionContext.cs" />
+    <Compile Include="AvalonEdit\Rendering\ITextViewConnect.cs" />
+    <Compile Include="AvalonEdit\Rendering\IVisualLineTransformer.cs" />
+    <Compile Include="AvalonEdit\Rendering\Layer.cs" />
+    <Compile Include="AvalonEdit\Rendering\LayerPosition.cs" />
+    <Compile Include="AvalonEdit\Rendering\LinkElementGenerator.cs" />
+    <Compile Include="AvalonEdit\Rendering\MouseHoverLogic.cs" />
+    <Compile Include="AvalonEdit\Rendering\SimpleTextSource.cs" />
+    <Compile Include="AvalonEdit\Rendering\SingleCharacterElementGenerator.cs" />
+    <Compile Include="AvalonEdit\Rendering\TextLayer.cs" />
+    <Compile Include="AvalonEdit\Rendering\TextView.cs" />
+    <Compile Include="AvalonEdit\Rendering\TextViewCachedElements.cs" />
+    <Compile Include="AvalonEdit\Rendering\TextViewWeakEventManager.cs" />
+    <Compile Include="AvalonEdit\Rendering\VisualLine.cs" />
+    <Compile Include="AvalonEdit\Rendering\VisualLineConstructionStartEventArgs.cs" />
+    <Compile Include="AvalonEdit\Rendering\VisualLineElement.cs" />
+    <Compile Include="AvalonEdit\Rendering\VisualLineElementGenerator.cs" />
+    <Compile Include="AvalonEdit\Rendering\VisualLineElementTextRunProperties.cs" />
+    <Compile Include="AvalonEdit\Rendering\VisualLineLinkText.cs" />
+    <Compile Include="AvalonEdit\Rendering\VisualLinesInvalidException.cs" />
+    <Compile Include="AvalonEdit\Rendering\VisualLineText.cs" />
+    <Compile Include="AvalonEdit\Rendering\VisualLineTextParagraphProperties.cs" />
+    <Compile Include="AvalonEdit\Rendering\VisualLineTextSource.cs" />
+    <Compile Include="AvalonEdit\Rendering\VisualYPosition.cs" />
+    <Compile Include="AvalonEdit\Search\DropDownButton.cs" />
+    <Compile Include="AvalonEdit\Search\ISearchStrategy.cs" />
+    <Compile Include="AvalonEdit\Search\Localization.cs" />
+    <Compile Include="AvalonEdit\Search\RegexSearchStrategy.cs" />
+    <Compile Include="AvalonEdit\Search\SearchCommands.cs" />
+    <Compile Include="AvalonEdit\Search\SearchPanel.cs" />
+    <Compile Include="AvalonEdit\Search\SearchResultBackgroundRenderer.cs" />
+    <Compile Include="AvalonEdit\Search\SearchStrategyFactory.cs" />
+    <Compile Include="AvalonEdit\Snippets\IActiveElement.cs" />
+    <Compile Include="AvalonEdit\Snippets\InsertionContext.cs" />
+    <Compile Include="AvalonEdit\Snippets\Snippet.cs" />
+    <Compile Include="AvalonEdit\Snippets\SnippetAnchorElement.cs" />
+    <Compile Include="AvalonEdit\Snippets\SnippetBoundElement.cs" />
+    <Compile Include="AvalonEdit\Snippets\SnippetCaretElement.cs" />
+    <Compile Include="AvalonEdit\Snippets\SnippetContainerElement.cs" />
+    <Compile Include="AvalonEdit\Snippets\SnippetElement.cs" />
+    <Compile Include="AvalonEdit\Snippets\SnippetEventArgs.cs" />
+    <Compile Include="AvalonEdit\Snippets\SnippetInputHandler.cs" />
+    <Compile Include="AvalonEdit\Snippets\SnippetReplaceableTextElement.cs" />
+    <Compile Include="AvalonEdit\Snippets\SnippetSelectionElement.cs" />
+    <Compile Include="AvalonEdit\Snippets\SnippetTextElement.cs" />
+    <Compile Include="AvalonEdit\TextEditor.cs" />
+    <Compile Include="AvalonEdit\TextEditorAutomationPeer.cs" />
+    <Compile Include="AvalonEdit\TextEditorComponent.cs" />
+    <Compile Include="AvalonEdit\TextEditorOptions.cs" />
+    <Compile Include="AvalonEdit\TextEditorWeakEventManager.cs" />
+    <Compile Include="AvalonEdit\TextViewPosition.cs" />
+    <Compile Include="AvalonEdit\Utils\Boxes.cs" />
+    <Compile Include="AvalonEdit\Utils\CallbackOnDispose.cs" />
+    <Compile Include="AvalonEdit\Utils\CharRope.cs" />
+    <Compile Include="AvalonEdit\Utils\CompressingTreeList.cs" />
+    <Compile Include="AvalonEdit\Utils\Constants.cs" />
+    <Compile Include="AvalonEdit\Utils\DelayedEvents.cs" />
+    <Compile Include="AvalonEdit\Utils\Deque.cs" />
+    <Compile Include="AvalonEdit\Utils\DocumentPrinter.cs" />
+    <Compile Include="AvalonEdit\Utils\Empty.cs" />
+    <Compile Include="AvalonEdit\Utils\ExtensionMethods.cs" />
+    <Compile Include="AvalonEdit\Utils\FileReader.cs" />
+    <Compile Include="AvalonEdit\Utils\IFreezable.cs" />
+    <Compile Include="AvalonEdit\Utils\ImmutableStack.cs" />
+    <Compile Include="AvalonEdit\Utils\NullSafeCollection.cs" />
+    <Compile Include="AvalonEdit\Utils\ObserveAddRemoveCollection.cs" />
+    <Compile Include="AvalonEdit\Utils\PixelSnapHelpers.cs" />
+    <Compile Include="AvalonEdit\Utils\PlainRichTextWriter.cs" />
+    <Compile Include="AvalonEdit\Utils\PropertyChangedWeakEventManager.cs" />
+    <Compile Include="AvalonEdit\Utils\RichTextWriter.cs" />
+    <Compile Include="AvalonEdit\Utils\Rope.cs" />
+    <Compile Include="AvalonEdit\Utils\RopeNode.cs" />
+    <Compile Include="AvalonEdit\Utils\RopeTextReader.cs" />
+    <Compile Include="AvalonEdit\Utils\StringSegment.cs" />
+    <Compile Include="AvalonEdit\Utils\TextFormatterFactory.cs" />
+    <Compile Include="AvalonEdit\Utils\ThrowUtil.cs" />
+    <Compile Include="AvalonEdit\Utils\WeakEventManagerBase.cs" />
+    <Compile Include="AvalonEdit\Utils\Win32.cs" />
     <Compile Include="Behaviours\BindableResourceBehavior.cs" />
     <Compile Include="Behaviours\BorderlessWindowBehavior.cs" />
     <Compile Include="Behaviours\DatePickerTextBoxBehavior.cs" />
@@ -976,6 +1216,30 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="AvalonEdit\Highlighting\Resources\ASPX.xshd" />
+    <EmbeddedResource Include="AvalonEdit\Highlighting\Resources\Boo.xshd" />
+    <EmbeddedResource Include="AvalonEdit\Highlighting\Resources\Coco-Mode.xshd" />
+    <EmbeddedResource Include="AvalonEdit\Highlighting\Resources\CPP-Mode.xshd" />
+    <EmbeddedResource Include="AvalonEdit\Highlighting\Resources\CSharp-Mode.xshd" />
+    <EmbeddedResource Include="AvalonEdit\Highlighting\Resources\CSS-Mode.xshd" />
+    <EmbeddedResource Include="AvalonEdit\Highlighting\Resources\HTML-Mode.xshd" />
+    <EmbeddedResource Include="AvalonEdit\Highlighting\Resources\Java-Mode.xshd" />
+    <EmbeddedResource Include="AvalonEdit\Highlighting\Resources\JavaScript-Mode.xshd" />
+    <EmbeddedResource Include="AvalonEdit\Highlighting\Resources\MarkDown-Mode.xshd" />
+    <EmbeddedResource Include="AvalonEdit\Highlighting\Resources\ModeV1.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AvalonEdit\Highlighting\Resources\ModeV2.xsd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AvalonEdit\Highlighting\Resources\Patch-Mode.xshd" />
+    <EmbeddedResource Include="AvalonEdit\Highlighting\Resources\PHP-Mode.xshd" />
+    <EmbeddedResource Include="AvalonEdit\Highlighting\Resources\PowerShell.xshd" />
+    <EmbeddedResource Include="AvalonEdit\Highlighting\Resources\Tex-Mode.xshd" />
+    <EmbeddedResource Include="AvalonEdit\Highlighting\Resources\TSQL-Mode.xshd" />
+    <EmbeddedResource Include="AvalonEdit\Highlighting\Resources\VB-Mode.xshd" />
+    <EmbeddedResource Include="AvalonEdit\Highlighting\Resources\XML-Mode.xshd" />
+    <EmbeddedResource Include="AvalonEdit\Highlighting\Resources\XmlDoc.xshd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -1007,6 +1271,14 @@
     <Resource Include="Themes\AvalonDock\Generic\Images\PinMenu.png" />
     <Resource Include="Themes\AvalonDock\Generic\Images\PinRestore.png" />
     <Resource Include="Themes\AvalonDock\Generic\Images\VTabGroup.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="AvalonEdit\Search\next.png" />
+    <Resource Include="AvalonEdit\Search\prev.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Themes\AvalonEdit\RightArrow.cur" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

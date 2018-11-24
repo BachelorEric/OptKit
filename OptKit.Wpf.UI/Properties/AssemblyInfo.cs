@@ -23,6 +23,13 @@ using System.Windows.Markup;
 [assembly: XmlnsDefinition("http://metro.optkit.com/winfx/xaml/avalondock", "OptKit.Wpf.UI.AvalonDock.Layout")]
 [assembly: XmlnsDefinition("http://metro.optkit.com/winfx/xaml/avalondock", "OptKit.Wpf.UI.AvalonDock.Themes")]
 
+[assembly: XmlnsPrefix("http://metro.optkit.com/winfx/xaml/avalonedit", "optkitAvalonEdit")]
+[assembly: XmlnsDefinition("http://metro.optkit.com/winfx/xaml/avalonedit", "OptKit.Wpf.UI.AvalonEdit")]
+[assembly: XmlnsDefinition("http://metro.optkit.com/winfx/xaml/avalonedit", "OptKit.Wpf.UI.AvalonEdit.Editing")]
+[assembly: XmlnsDefinition("http://metro.optkit.com/winfx/xaml/avalonedit", "OptKit.Wpf.UI.AvalonEdit.Rendering")]
+[assembly: XmlnsDefinition("http://metro.optkit.com/winfx/xaml/avalonedit", "OptKit.Wpf.UI.AvalonEdit.Highlighting")]
+[assembly: XmlnsDefinition("http://metro.optkit.com/winfx/xaml/avalonedit", "OptKit.Wpf.UI.AvalonEdit.Search")]
+
 [assembly: AssemblyTitle("OptKit.Wpf.UI")]
 [assembly: AssemblyCopyright("Copyright © OptKit.Wpf.UI 2011-2018")]
 [assembly: AssemblyDescription("A toolkit for creating Metro / Modern UI styled WPF apps.")]

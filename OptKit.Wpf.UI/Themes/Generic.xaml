@@ -38,6 +38,7 @@
         <ResourceDictionary Source="pack://application:,,,/OptKit.Wpf.UI;component/Themes/ContentControlEx.xaml" />
         <ResourceDictionary Source="pack://application:,,,/OptKit.Wpf.UI;component/Themes/Dialogs/BaseMetroDialog.xaml" />
         <ResourceDictionary Source="pack://application:,,,/OptKit.Wpf.UI;component/Themes/AvalonDock/generic.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/OptKit.Wpf.UI;component/Themes/AvalonEdit/generic.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <!--  set up default styles for our custom controls  -->

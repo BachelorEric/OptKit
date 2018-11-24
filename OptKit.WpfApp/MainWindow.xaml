@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:OptKit.WpfApp"
     xmlns:optkitAvalonDock="http://metro.optkit.com/winfx/xaml/avalondock"
+    xmlns:optkitAvalonEdit="http://metro.optkit.com/winfx/xaml/avalonedit"
     x:Class="OptKit.WpfApp.MainWindow"
     mc:Ignorable="d"
     Title="MainWindow" Height="450" Width="800">
@@ -16,9 +17,7 @@
                     <optkitAvalonDock:LayoutDocumentPane>
                         <optkitAvalonDock:LayoutDocument ContentId="document1"
                                      Title="Document 1">
-                            <Button Content="Document 1 Content"
-                          HorizontalAlignment="Center"
-                          VerticalAlignment="Center" />
+                            <optkitAvalonEdit:TextEditor  FontFamily="Consolas" FontSize="10pt" SyntaxHighlighting="C#"/>
                         </optkitAvalonDock:LayoutDocument>
                         <optkitAvalonDock:LayoutDocument ContentId="document2"
                                      Title="Document 2">
