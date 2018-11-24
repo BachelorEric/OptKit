@@ -7,7 +7,7 @@ using System.Windows.Markup;
 [assembly: ThemeInfo(ResourceDictionaryLocation.None, ResourceDictionaryLocation.SourceAssembly)]
 
 [assembly: XmlnsPrefix("http://metro.optkit.com/winfx/xaml/controls", "optkit")]
-[assembly: XmlnsPrefix("http://metro.optkit.com/winfx/xaml/shared", "optkit")]
+[assembly: XmlnsPrefix("http://metro.optkit.com/winfx/xaml/shared", "optkitShared")]
 
 [assembly: XmlnsDefinition("http://metro.optkit.com/winfx/xaml/shared", "OptKit.Wpf.UI.Behaviours")]
 [assembly: XmlnsDefinition("http://metro.optkit.com/winfx/xaml/shared", "OptKit.Wpf.UI.Actions")]
@@ -15,6 +15,13 @@ using System.Windows.Markup;
 [assembly: XmlnsDefinition("http://metro.optkit.com/winfx/xaml/controls", "OptKit.Wpf.UI")]
 [assembly: XmlnsDefinition("http://metro.optkit.com/winfx/xaml/controls", "OptKit.Wpf.UI.Controls")]
 [assembly: XmlnsDefinition("http://metro.optkit.com/winfx/xaml/controls", "OptKit.Wpf.UI.Controls.Dialogs")]
+
+[assembly: XmlnsPrefix("http://metro.optkit.com/winfx/xaml/avalondock", "optkitAvalonDock")]
+[assembly: XmlnsDefinition("http://metro.optkit.com/winfx/xaml/avalondock", "OptKit.Wpf.UI.AvalonDock")]
+[assembly: XmlnsDefinition("http://metro.optkit.com/winfx/xaml/avalondock", "OptKit.Wpf.UI.AvalonDock.Controls")]
+[assembly: XmlnsDefinition("http://metro.optkit.com/winfx/xaml/avalondock", "OptKit.Wpf.UI.AvalonDock.Converters")]
+[assembly: XmlnsDefinition("http://metro.optkit.com/winfx/xaml/avalondock", "OptKit.Wpf.UI.AvalonDock.Layout")]
+[assembly: XmlnsDefinition("http://metro.optkit.com/winfx/xaml/avalondock", "OptKit.Wpf.UI.AvalonDock.Themes")]
 
 [assembly: AssemblyTitle("OptKit.Wpf.UI")]
 [assembly: AssemblyCopyright("Copyright © OptKit.Wpf.UI 2011-2018")]
@@ -25,9 +32,3 @@ using System.Windows.Markup;
 [assembly: AssemblyFileVersion("1.0.0.0")]
 [assembly: AssemblyInformationalVersion("1.0.0.0")]
 [assembly: AssemblyProduct("OptKit.Wpf.UI")]
-
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("WpfAnalyzers.DependencyProperty", "WPF0005:Name of PropertyChangedCallback should match registered name.")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("WpfAnalyzers.DependencyProperty", "WPF0006:Name of CoerceValueCallback should match registered name.")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("WpfAnalyzers.DependencyProperty", "WPF0007:Name of ValidateValueCallback should match registered name.")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("WpfAnalyzers.DependencyProperty", "WPF0036:Avoid side effects in CLR accessors.")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("WpfAnalyzers.DependencyProperty", "WPF0041:Set mutable dependency properties using SetCurrentValue.")]

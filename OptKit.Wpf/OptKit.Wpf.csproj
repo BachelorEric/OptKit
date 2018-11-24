@@ -70,5 +70,15 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OptKit.Wpf.UI\OptKit.Wpf.UI.csproj">
+      <Project>{b6233805-504f-4247-863f-d0b486b8cb7a}</Project>
+      <Name>OptKit.Wpf.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OptKit\OptKit.csproj">
+      <Project>{6fc6ac62-09af-42fe-8b7b-88ed3a8abe5f}</Project>
+      <Name>OptKit</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

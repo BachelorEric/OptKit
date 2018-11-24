@@ -469,6 +469,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Themes\AvalonDock\generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Themes\Badged.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -633,6 +637,144 @@
     <Compile Include="Behaviours\TiltBehavior.cs" />
     <Compile Include="Behaviours\WindowsSettingBehaviour.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="AvalonDock\Commands\RelayCommand.cs" />
+    <Compile Include="AvalonDock\Controls\AnchorablePaneControlOverlayArea.cs" />
+    <Compile Include="AvalonDock\Controls\AnchorablePaneDropTarget.cs" />
+    <Compile Include="AvalonDock\Controls\AnchorablePaneTabPanel.cs" />
+    <Compile Include="AvalonDock\Controls\AnchorablePaneTitle.cs" />
+    <Compile Include="AvalonDock\Controls\AutoHideWindowManager.cs" />
+    <Compile Include="AvalonDock\Controls\BindingHelper.cs" />
+    <Compile Include="AvalonDock\Controls\ContextMenuEx.cs" />
+    <Compile Include="AvalonDock\Controls\DockingManagerDropTarget.cs" />
+    <Compile Include="AvalonDock\Controls\DockingManagerOverlayArea.cs" />
+    <Compile Include="AvalonDock\Controls\DocumentPaneControlOverlayArea.cs" />
+    <Compile Include="AvalonDock\Controls\DocumentPaneDropAsAnchorableTarget.cs" />
+    <Compile Include="AvalonDock\Controls\DocumentPaneDropTarget.cs" />
+    <Compile Include="AvalonDock\Controls\DocumentPaneGroupDropTarget.cs" />
+    <Compile Include="AvalonDock\Controls\DocumentPaneTabPanel.cs" />
+    <Compile Include="AvalonDock\Controls\DragService.cs" />
+    <Compile Include="AvalonDock\Controls\DropArea.cs" />
+    <Compile Include="AvalonDock\Controls\DropDownButton.cs" />
+    <Compile Include="AvalonDock\Controls\DropDownControlArea.cs" />
+    <Compile Include="AvalonDock\Controls\DropTarget.cs" />
+    <Compile Include="AvalonDock\Controls\DropTargetBase.cs" />
+    <Compile Include="AvalonDock\Controls\DropTargetType.cs" />
+    <Compile Include="AvalonDock\Controls\Extentions.cs" />
+    <Compile Include="AvalonDock\Controls\FocusElementManager.cs" />
+    <Compile Include="AvalonDock\Controls\FullWeakDictionary.cs" />
+    <Compile Include="AvalonDock\Controls\IDropTarget.cs" />
+    <Compile Include="AvalonDock\Controls\IOverlayWindow.cs" />
+    <Compile Include="AvalonDock\Controls\IOverlayWindowArea.cs" />
+    <Compile Include="AvalonDock\Controls\IOverlayWindowDropTarget.cs" />
+    <Compile Include="AvalonDock\Controls\IOverlayWindowHost.cs" />
+    <Compile Include="AvalonDock\Controls\LayoutAnchorableControl.cs" />
+    <Compile Include="AvalonDock\Controls\LayoutAnchorableFloatingWindowControl.cs" />
+    <Compile Include="AvalonDock\Controls\LayoutAnchorableItem.cs" />
+    <Compile Include="AvalonDock\Controls\LayoutAnchorablePaneControl.cs" />
+    <Compile Include="AvalonDock\Controls\LayoutAnchorablePaneGroupControl.cs" />
+    <Compile Include="AvalonDock\Controls\LayoutAnchorableTabItem.cs" />
+    <Compile Include="AvalonDock\Controls\LayoutAnchorControl.cs" />
+    <Compile Include="AvalonDock\Controls\LayoutAnchorGroupControl.cs" />
+    <Compile Include="AvalonDock\Controls\LayoutAnchorSideControl.cs" />
+    <Compile Include="AvalonDock\Controls\LayoutAutoHideWindowControl.cs" />
+    <Compile Include="AvalonDock\Controls\LayoutDocumentControl.cs" />
+    <Compile Include="AvalonDock\Controls\LayoutDocumentFloatingWindowControl.cs" />
+    <Compile Include="AvalonDock\Controls\LayoutDocumentItem.cs" />
+    <Compile Include="AvalonDock\Controls\LayoutDocumentPaneControl.cs" />
+    <Compile Include="AvalonDock\Controls\LayoutDocumentPaneGroupControl.cs" />
+    <Compile Include="AvalonDock\Controls\LayoutDocumentTabItem.cs" />
+    <Compile Include="AvalonDock\Controls\LayoutFloatingWindowControl.cs" />
+    <Compile Include="AvalonDock\Controls\LayoutGridControl.cs" />
+    <Compile Include="AvalonDock\Controls\LayoutGridResizerControl.cs" />
+    <Compile Include="AvalonDock\Controls\LayoutItem.cs" />
+    <Compile Include="AvalonDock\Controls\LayoutPanelControl.cs" />
+    <Compile Include="AvalonDock\Controls\MenuItemEx.cs" />
+    <Compile Include="AvalonDock\Controls\NavigatorWindow.cs" />
+    <Compile Include="AvalonDock\Controls\OverlayArea.cs" />
+    <Compile Include="AvalonDock\Controls\OverlayWindow.cs" />
+    <Compile Include="AvalonDock\Controls\OverlayWindowDropTarget.cs" />
+    <Compile Include="AvalonDock\Controls\OverlayWindowDropTargetType.cs" />
+    <Compile Include="AvalonDock\Controls\ReentrantFlag.cs" />
+    <Compile Include="AvalonDock\Controls\Shell\Standard\ComGuids.cs" />
+    <Compile Include="AvalonDock\Controls\Shell\Standard\Debug.cs" />
+    <Compile Include="AvalonDock\Controls\Shell\Standard\DoubleUtil.cs" />
+    <Compile Include="AvalonDock\Controls\Shell\Standard\DpiHelper.cs" />
+    <Compile Include="AvalonDock\Controls\Shell\Standard\ErrorCodes.cs" />
+    <Compile Include="AvalonDock\Controls\Shell\Standard\MessageWindow.cs" />
+    <Compile Include="AvalonDock\Controls\Shell\Standard\NativeMethods.cs" />
+    <Compile Include="AvalonDock\Controls\Shell\Standard\ShellProvider.cs" />
+    <Compile Include="AvalonDock\Controls\Shell\Standard\StreamHelper.cs" />
+    <Compile Include="AvalonDock\Controls\Shell\Standard\Utilities.cs" />
+    <Compile Include="AvalonDock\Controls\Shell\Standard\Verify.cs" />
+    <Compile Include="AvalonDock\Controls\Shell\SystemCommands.cs" />
+    <Compile Include="AvalonDock\Controls\Shell\SystemParameters2.cs" />
+    <Compile Include="AvalonDock\Controls\Shell\WindowChrome.cs" />
+    <Compile Include="AvalonDock\Controls\Shell\WindowChromeWorker.cs" />
+    <Compile Include="AvalonDock\Controls\TransformExtentions.cs" />
+    <Compile Include="AvalonDock\Controls\WeakDictionary.cs" />
+    <Compile Include="AvalonDock\Controls\WindowActivateEventArgs.cs" />
+    <Compile Include="AvalonDock\Controls\WindowHookHandler.cs" />
+    <Compile Include="AvalonDock\Converters\ActivateCommandLayoutItemFromLayoutModelConverter.cs" />
+    <Compile Include="AvalonDock\Converters\AnchorableContextMenuHideVisibilityConverter.cs" />
+    <Compile Include="AvalonDock\Converters\AnchorSideToAngleConverter.cs" />
+    <Compile Include="AvalonDock\Converters\AnchorSideToOrientationConverter.cs" />
+    <Compile Include="AvalonDock\Converters\AutoHideCommandLayoutItemFromLayoutModelConverter.cs" />
+    <Compile Include="AvalonDock\Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="AvalonDock\Converters\HideCommandLayoutItemFromLayoutModelConverter.cs" />
+    <Compile Include="AvalonDock\Converters\InverseBoolToVisibilityConverter.cs" />
+    <Compile Include="AvalonDock\Converters\LayoutItemFromLayoutModelConverter.cs" />
+    <Compile Include="AvalonDock\Converters\NullToDoNothingConverter.cs" />
+    <Compile Include="AvalonDock\Converters\UriSourceToBitmapImageConverter.cs" />
+    <Compile Include="AvalonDock\DockingManager.cs" />
+    <Compile Include="AvalonDock\DocumentClosedEventArgs.cs" />
+    <Compile Include="AvalonDock\DocumentClosingEventArgs.cs" />
+    <Compile Include="AvalonDock\Extentions.cs" />
+    <Compile Include="AvalonDock\LayoutEventArgs.cs" />
+    <Compile Include="AvalonDock\Layout\AnchorableShowStrategy.cs" />
+    <Compile Include="AvalonDock\Layout\AnchorSide.cs" />
+    <Compile Include="AvalonDock\Layout\ChildrenTreeChangedEventArgs.cs" />
+    <Compile Include="AvalonDock\Layout\Extentions.cs" />
+    <Compile Include="AvalonDock\Layout\ILayoutAnchorablePane.cs" />
+    <Compile Include="AvalonDock\Layout\ILayoutContainer.cs" />
+    <Compile Include="AvalonDock\Layout\ILayoutContentSelector.cs" />
+    <Compile Include="AvalonDock\Layout\ILayoutControl.cs" />
+    <Compile Include="AvalonDock\Layout\ILayoutDocumentPane.cs" />
+    <Compile Include="AvalonDock\Layout\ILayoutElement.cs" />
+    <Compile Include="AvalonDock\Layout\ILayoutElementWithVisibility.cs" />
+    <Compile Include="AvalonDock\Layout\ILayoutGroup.cs" />
+    <Compile Include="AvalonDock\Layout\ILayoutOrientableElement.cs" />
+    <Compile Include="AvalonDock\Layout\ILayoutPane.cs" />
+    <Compile Include="AvalonDock\Layout\ILayoutPanelElement.cs" />
+    <Compile Include="AvalonDock\Layout\ILayoutPaneSerializable.cs" />
+    <Compile Include="AvalonDock\Layout\ILayoutPositionableElement.cs" />
+    <Compile Include="AvalonDock\Layout\ILayoutPreviousContainer.cs" />
+    <Compile Include="AvalonDock\Layout\ILayoutRoot.cs" />
+    <Compile Include="AvalonDock\Layout\ILayoutUpdateStrategy.cs" />
+    <Compile Include="AvalonDock\Layout\LayoutAnchorable.cs" />
+    <Compile Include="AvalonDock\Layout\LayoutAnchorableFloatingWindow.cs" />
+    <Compile Include="AvalonDock\Layout\LayoutAnchorablePane.cs" />
+    <Compile Include="AvalonDock\Layout\LayoutAnchorablePaneGroup.cs" />
+    <Compile Include="AvalonDock\Layout\LayoutAnchorGroup.cs" />
+    <Compile Include="AvalonDock\Layout\LayoutAnchorSide.cs" />
+    <Compile Include="AvalonDock\Layout\LayoutContent.cs" />
+    <Compile Include="AvalonDock\Layout\LayoutDocument.cs" />
+    <Compile Include="AvalonDock\Layout\LayoutDocumentFloatingWindow.cs" />
+    <Compile Include="AvalonDock\Layout\LayoutDocumentPane.cs" />
+    <Compile Include="AvalonDock\Layout\LayoutDocumentPaneGroup.cs" />
+    <Compile Include="AvalonDock\Layout\LayoutElement.cs" />
+    <Compile Include="AvalonDock\Layout\LayoutElementEventArgs.cs" />
+    <Compile Include="AvalonDock\Layout\LayoutFloatingWindow.cs" />
+    <Compile Include="AvalonDock\Layout\LayoutGroup.cs" />
+    <Compile Include="AvalonDock\Layout\LayoutGroupBase.cs" />
+    <Compile Include="AvalonDock\Layout\LayoutPanel.cs" />
+    <Compile Include="AvalonDock\Layout\LayoutPositionableGroup.cs" />
+    <Compile Include="AvalonDock\Layout\LayoutRoot.cs" />
+    <Compile Include="AvalonDock\Layout\Serialization\LayoutSerializationCallbackEventArgs.cs" />
+    <Compile Include="AvalonDock\Layout\Serialization\LayoutSerializer.cs" />
+    <Compile Include="AvalonDock\Layout\Serialization\XmlLayoutSerializer.cs" />
+    <Compile Include="AvalonDock\MathHelper.cs" />
+    <Compile Include="AvalonDock\Win32Helper.cs" />
+    <Compile Include="AvalonDock\WindowHelper.cs" />
     <Compile Include="Controls\Badged.cs" />
     <Compile Include="Controls\ButtonsAlignment.cs" />
     <Compile Include="Controls\ClipBorder.cs" />
@@ -827,8 +969,11 @@
     </Compile>
     <Compile Include="ThemeManager\Theme.cs" />
     <Compile Include="ThemeManager\ThemeManager.cs" />
+    <Compile Include="Themes\AvalonDock\DictionaryTheme.cs" />
+    <Compile Include="Themes\AvalonDock\GenericTheme.cs" />
+    <Compile Include="Themes\AvalonDock\AvalonDockTheme.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
@@ -837,6 +982,31 @@
     </None>
     <None Include="Styles\Themes\GeneratorParameters.json" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Themes\AvalonDock\Generic\Images\DockBottom.PNG" />
+    <Resource Include="Themes\AvalonDock\Generic\Images\DockLeft.PNG" />
+    <Resource Include="Themes\AvalonDock\Generic\Images\DockPane.PNG" />
+    <Resource Include="Themes\AvalonDock\Generic\Images\DockPaneEmpty.png" />
+    <Resource Include="Themes\AvalonDock\Generic\Images\DockRight.PNG" />
+    <Resource Include="Themes\AvalonDock\Generic\Images\DockTop.PNG" />
+    <Resource Include="Themes\AvalonDock\Generic\Images\HTabGroup.png" />
+    <Resource Include="Themes\AvalonDock\Generic\Images\InnerDockDocPaneBottom.png" />
+    <Resource Include="Themes\AvalonDock\Generic\Images\InnerDockDocPaneLeft.png" />
+    <Resource Include="Themes\AvalonDock\Generic\Images\InnerDockDocPaneRight.png" />
+    <Resource Include="Themes\AvalonDock\Generic\Images\InnerDockDocPaneTop.png" />
+    <Resource Include="Themes\AvalonDock\Generic\Images\InnerDockPaneBottom.png" />
+    <Resource Include="Themes\AvalonDock\Generic\Images\InnerDockPaneInside.png" />
+    <Resource Include="Themes\AvalonDock\Generic\Images\InnerDockPaneLeft.png" />
+    <Resource Include="Themes\AvalonDock\Generic\Images\InnerDockPaneRight.png" />
+    <Resource Include="Themes\AvalonDock\Generic\Images\InnerDockPaneTop.png" />
+    <Resource Include="Themes\AvalonDock\Generic\Images\Locked.png" />
+    <Resource Include="Themes\AvalonDock\Generic\Images\PinAutoHide.png" />
+    <Resource Include="Themes\AvalonDock\Generic\Images\PinClose.png" />
+    <Resource Include="Themes\AvalonDock\Generic\Images\PinDocMenu.png" />
+    <Resource Include="Themes\AvalonDock\Generic\Images\PinMaximize.png" />
+    <Resource Include="Themes\AvalonDock\Generic\Images\PinMenu.png" />
+    <Resource Include="Themes\AvalonDock\Generic\Images\PinRestore.png" />
+    <Resource Include="Themes\AvalonDock\Generic\Images\VTabGroup.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

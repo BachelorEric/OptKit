@@ -1,16 +1,56 @@
 ﻿<optkit:MetroWindow
-    xmlns:optkit="http://metro.optkit.com/winfx/xaml/controls" 
-    x:Class="OptKit.WpfApp.MainWindow"
+    xmlns:optkit="http://metro.optkit.com/winfx/xaml/controls"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:local="clr-namespace:OptKit.WpfApp"
+    xmlns:optkitAvalonDock="http://metro.optkit.com/winfx/xaml/avalondock"
+    x:Class="OptKit.WpfApp.MainWindow"
     mc:Ignorable="d"
     Title="MainWindow" Height="450" Width="800">
-    <DataGrid>
-        <DataGrid.Columns>
-            <DataGridCheckBoxColumn Header="abc"/>
-        </DataGrid.Columns>
-    </DataGrid>
+    <optkitAvalonDock:DockingManager>
+        <optkitAvalonDock:LayoutRoot x:Name="_layoutRoot">
+            <optkitAvalonDock:LayoutPanel Orientation="Horizontal">
+                <optkitAvalonDock:LayoutDocumentPaneGroup>
+                    <optkitAvalonDock:LayoutDocumentPane>
+                        <optkitAvalonDock:LayoutDocument ContentId="document1"
+                                     Title="Document 1">
+                            <Button Content="Document 1 Content"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center" />
+                        </optkitAvalonDock:LayoutDocument>
+                        <optkitAvalonDock:LayoutDocument ContentId="document2"
+                                     Title="Document 2">
+                            <TextBox Text="Document 2 Content"
+                           AcceptsReturn="True" />
+                        </optkitAvalonDock:LayoutDocument>
+                    </optkitAvalonDock:LayoutDocumentPane>
+                </optkitAvalonDock:LayoutDocumentPaneGroup >
+            </optkitAvalonDock:LayoutPanel>
+
+            <optkitAvalonDock:LayoutRoot.LeftSide>
+                <optkitAvalonDock:LayoutAnchorSide>
+                    <optkitAvalonDock:LayoutAnchorGroup>
+                        <optkitAvalonDock:LayoutAnchorable Title="Agenda"
+                                       ContentId="agenda">
+                            <TextBlock Text="Agenda Content"
+                             Margin="10"
+                             FontSize="18"
+                             FontWeight="Black"
+                             TextWrapping="Wrap" />
+                        </optkitAvalonDock:LayoutAnchorable>
+                        <optkitAvalonDock:LayoutAnchorable Title="Contacts"
+                                       ContentId="contacts">
+                            <TextBlock Text="Contacts Content"
+                             Margin="10"
+                             FontSize="18"
+                             FontWeight="Black"
+                             TextWrapping="Wrap" />
+                        </optkitAvalonDock:LayoutAnchorable>
+                    </optkitAvalonDock:LayoutAnchorGroup>
+                </optkitAvalonDock:LayoutAnchorSide>
+            </optkitAvalonDock:LayoutRoot.LeftSide>
+        </optkitAvalonDock:LayoutRoot>
+    </optkitAvalonDock:DockingManager>
 </optkit:MetroWindow>
