@@ -9,14 +9,20 @@ namespace OptKit.Domain
     /// </summary>
     public interface IListProperty : IProperty
     {
+        Type ListType { get; }
     }
 
     /// <summary>
     /// 列表属性声明
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IListProperty<T> : IListProperty
+    public interface IListProperty<T> : IProperty<T>, IListProperty
     {
 
+    }
+
+    class ListProperty<T> : Property, IListProperty<T>
+    {
+        public Type ListType => throw new NotImplementedException();
     }
 }

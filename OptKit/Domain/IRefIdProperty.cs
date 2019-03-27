@@ -15,8 +15,10 @@ namespace OptKit.Domain
     /// 引用ID属性声明
     /// </summary>
     /// <typeparam name="T">属性值类型</typeparam>
-    public interface IRefIdProperty<T> : IRefIdProperty
+    public interface IRefIdProperty<T> : IRefProperty<T>, IRefIdProperty
     {
 
     }
+
+    class RefIdProperty<T> : RefProperty<T> { }
 }

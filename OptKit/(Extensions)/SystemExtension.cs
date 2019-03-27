@@ -7,7 +7,7 @@ using System.Xml.Linq;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using System.Reflection;
-using OptKit.ComponentModel;
+using OptKit;
 
 namespace System
 {

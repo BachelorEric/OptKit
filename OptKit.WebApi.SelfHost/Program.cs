@@ -16,6 +16,11 @@ namespace OptKit.WebApi.SelfHost
         {
             ConfigManager.Create().UserJsonConfig("appsettings.json");
 
+            RT.ModuleAssemblyFilter = assembly =>
+            {
+                return !assembly.Contains("OptKit.Schedule");
+            };
+
             AppDomain.CurrentDomain.UnhandledException += (s, e) =>
             {
                 Console.WriteLine(e.ExceptionObject?.ToString());

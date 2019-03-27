@@ -11,11 +11,6 @@ namespace OptKit.WebApi.SelfHost
 {
     public class DataPortalController : ApiController
     {
-        public string Get()
-        {
-            return "a";
-        }
-
         [HttpPost]
         public ApiResponse Execute(ApiRequest request)
         {

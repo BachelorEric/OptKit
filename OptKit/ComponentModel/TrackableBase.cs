@@ -104,5 +104,10 @@ namespace OptKit.ComponentModel
         {
             return TrackableFactory.Create<T>();
         }
+
+        public Type GetRawType()
+        {
+            return TrackableFactory.GetRawType(GetType());
+        }
     }
 }

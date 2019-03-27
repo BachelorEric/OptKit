@@ -17,22 +17,17 @@ namespace OptKit.Domain
     /// 值属性声明
     /// </summary>
     /// <typeparam name="T">属性值类型</typeparam>
-    public interface IValueProperty<T> : IValueProperty
+    public interface IValueProperty<T> : IProperty<T>, IValueProperty
     {
     }
 
-    public interface IValuePropertyMeta
+    class ValueProperty : Property, IValueProperty
     {
-        object MaxValue { get; }
 
-        object MinValue { get; }
+    }
 
-        bool Updatable { get; }
+    class ValueProperty<T> : ValueProperty, IValueProperty<T>
+    {
 
-        DisplayFormatAttribute DisplayFormat { get; set; }
-
-        DisplayColumnAttribute DisplayColumn { get; }
-
-        ValidationAttribute[] Attributes { get; }
     }
 }

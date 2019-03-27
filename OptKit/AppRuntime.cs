@@ -1,6 +1,8 @@
 ﻿using OptKit.Configuration;
 using OptKit.DataPortal;
 using OptKit.Logging;
+using OptKit.Modules;
+using OptKit.Runtime;
 using OptKit.Services;
 using System;
 using System.Collections.Generic;
@@ -9,31 +11,32 @@ using System.Text;
 namespace OptKit
 {
     /// <summary>
-    /// 应用运行时工具类
+    /// 应用运行时工具类, AppRuntime缩写
     /// </summary>
-    public class AppRuntime
+    public partial class RT
     {
-        static DataPortalMode? _dataPortalMode;
         /// <summary>
-        /// 数据访问模式
+        /// 应用
         /// </summary>
-        public static DataPortalMode DataPortalMode
-        {
-            get
-            {
-                if (_dataPortalMode == null) _dataPortalMode = RT.Config.Get("DataPortalMode", DataPortalMode.Local);
-                return _dataPortalMode.Value;
-            }
-        }
+        public static IApp App { get; internal set; }
+
+        static RuntimeEnvironment environment;
+        /// <summary>
+        /// 运行时环境
+        /// </summary>
+        public static RuntimeEnvironment Environment { get { return environment ?? (environment = new RuntimeEnvironment()); } }
+
+        static IServiceContainer service;
         /// <summary>
         /// 服务容器
         /// </summary>
-        public static IServiceContainer Service { get; internal set; } = new ServiceContainer();
+        public static IServiceContainer Service { get { return service ?? (service = new ServiceContainer()); } internal set { service = value; } }
 
+        static ILog logger;
         /// <summary>
         /// 日志
         /// </summary>
-        public static ILog Logger { get { return LogService.Logger; } }
+        public static ILog Logger { get { return logger ?? (logger = LogService.GetLogger("runtime_logger")); } internal set { logger = value; } }
 
         /// <summary>
         /// 配置
@@ -45,6 +48,4 @@ namespace OptKit
         /// </summary>
         public static int TenantId { get; set; }
     }
-
-    public class RT : AppRuntime { }
 }

@@ -16,6 +16,11 @@ namespace OptKit.Modules
         public Type ModuleType { get; set; }
 
         /// <summary>
+        /// 加载顺序
+        /// </summary>
+        public int Index { get; set; } = ModuleIndex.Main;
+
+        /// <summary>
         /// 构造<see cref="ModuleInfoAttribute"/>实例
         /// </summary>
         public ModuleInfoAttribute() { }

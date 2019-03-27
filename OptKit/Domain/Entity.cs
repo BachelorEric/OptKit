@@ -20,26 +20,23 @@ namespace OptKit.Domain
         /// </summary>
         protected IFieldData FieldData
         {
-            get { return _fieldData ?? (_fieldData = DataFactory.Instance.Create(GetType())); }
+            get { return _fieldData ?? (_fieldData = new FieldData(PropertyContainer)); }
         }
+
+        /// <summary>
+        /// 属性容器
+        /// </summary>
+        public IPropertyContainer PropertyContainer
+        {
+            get { return _propertyContainer ?? (_propertyContainer = DomainManager.GetPropertyContainer(GetRawType())); }
+        }
+
+        #region ID
 
         object IEntity.Id
         {
             get => GetId();
             set => SetId(value);
-        }
-        TrackableState _state;
-        public TrackableState State
-        {
-            get { return _state; }
-            set
-            {
-                if (_state != value)
-                {
-                    _state = value;
-                    StateChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
         }
 
         /// <summary>
@@ -54,18 +51,74 @@ namespace OptKit.Domain
         /// <param name="id"></param>
         protected abstract void SetId(object id);
 
+        #endregion
+
+        #region State
+
+        TrackableState _state;
+        /// <summary>
+        /// 状态
+        /// </summary>
+        public TrackableState State
+        {
+            get { return _state; }
+            set
+            {
+                if (_state != value)
+                {
+                    _state = value;
+                    stateChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+
         [NonSerialized]
         IPropertyContainer _propertyContainer;
-
-        public event EventHandler StateChanged;
+        [NonSerialized]
+        EventHandler stateChanged;
 
         /// <summary>
-        /// 属性容器
+        /// 状态变更事件
         /// </summary>
-        public IPropertyContainer PropertyContainer
+        public event EventHandler StateChanged
         {
-            get { return _propertyContainer ?? (_propertyContainer = PropertyContainerFactory.Instance.Get(GetType())); }
+            add { stateChanged = (EventHandler)Delegate.Combine(stateChanged, value); }
+            remove { stateChanged = (EventHandler)Delegate.Remove(stateChanged, value); }
         }
+
+        /// <summary>
+        /// 标记为新
+        /// </summary>
+        public void MarkNew()
+        {
+            State = TrackableState.New;
+        }
+
+        /// <summary>
+        /// 标记为修改
+        /// </summary>
+        public void MarkModified()
+        {
+            State = TrackableState.Modified;
+        }
+
+        /// <summary>
+        /// 标记为删除
+        /// </summary>
+        public void MarkDeleted()
+        {
+            State = TrackableState.Deleted;
+        }
+
+        /// <summary>
+        /// 重置为未修改
+        /// </summary>
+        public void ResetState()
+        {
+            State = TrackableState.Unchanged;
+        }
+
+        #endregion
 
         public T Get<T>([CallerMemberName]string propertyName = null)
         {
@@ -87,7 +140,7 @@ namespace OptKit.Domain
                 return Get(property as IListProperty);
             if (property is IRefEntityProperty)
                 return Get(property as IRefEntityProperty);
-            return _fieldData.Get(property);
+            return FieldData.Get(property);
         }
 
         public T Get<T>(IProperty<T> property)
@@ -97,11 +150,11 @@ namespace OptKit.Domain
 
         public object Get(IRefEntityProperty property)
         {
-            if (_fieldData.Exists(property))
-                return _fieldData.Get(property);
-            if (_fieldData.Exists(property.RefIdProperty))
+            if (FieldData.Exists(property))
+                return FieldData.Get(property);
+            if (FieldData.Exists(property.RefIdProperty))
             {
-                var id = _fieldData.Get(property.RefIdProperty);
+                var id = FieldData.Get(property.RefIdProperty);
                 return RF.Find(property.PropertyType).GetById(id);
             }
             return null;
@@ -114,14 +167,14 @@ namespace OptKit.Domain
 
         public object Get(IListProperty property)
         {
-            if (_fieldData.Exists(property))
-                return _fieldData.Get(property);
+            if (FieldData.Exists(property))
+                return FieldData.Get(property);
             object result = null;
             if (State == TrackableState.New)
                 result = Activator.CreateInstance(property.PropertyType);
             else
                 result = RF.Find(property.PropertyType).GetByParentId(GetId());
-            _fieldData.Set(property, result);
+            FieldData.Set(property, result);
             return result;
         }
 
@@ -132,7 +185,7 @@ namespace OptKit.Domain
 
         public object Get(ICaculateProperty property)
         {
-            return property.ValueProvider.Invoke();
+            return property.ValueProvider.Invoke(this);
         }
 
         public T Get<T>(ICaculateProperty<T> property)
@@ -154,10 +207,10 @@ namespace OptKit.Domain
                 Set(value, property as IRefProperty);
             else
             {
-                object oldValue = _fieldData.Get(property);
+                object oldValue = FieldData.Get(property);
                 if (!object.Equals(oldValue, value))
                 {
-                    _fieldData.Set(property, value);
+                    FieldData.Set(property, value);
                     OnPropertyChanged(property.PropertyName);
                     OnValueChanged(property.PropertyName, value, oldValue);
                     if (State == TrackableState.Unchanged)
@@ -173,20 +226,20 @@ namespace OptKit.Domain
 
         public void Set<T>(T value, IRefProperty property)
         {
-            object oldValue = _fieldData.Get(property);
+            object oldValue = FieldData.Get(property);
             if (!object.Equals(oldValue, value))
             {
-                _fieldData.Set(property, value);
+                FieldData.Set(property, value);
                 OnPropertyChanged(property.PropertyName);
                 OnValueChanged(property.PropertyName, value, oldValue);
                 if (property is IRefIdProperty)
                 {
-                    _fieldData.Set(property.RefEntityProperty, null);
+                    FieldData.Set(property.RefEntityProperty, null);
                     OnPropertyChanged(property.RefEntityProperty.PropertyName);
                 }
                 if (property is IRefEntityProperty)
                 {
-                    _fieldData.Set(property.RefIdProperty, (value as Entity).GetId());
+                    FieldData.Set(property.RefIdProperty, (value as Entity).GetId());
                     OnPropertyChanged(property.RefIdProperty.PropertyName);
                 }
                 if (State == TrackableState.Unchanged)
@@ -199,24 +252,14 @@ namespace OptKit.Domain
             Set<T>(value, (IRefProperty)property);
         }
 
-        public void MarkNew()
+        /// <summary>
+        /// 创建<see cref="Entity"/>实例的代理
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public new static T Create<T>() where T : Entity
         {
-            State = TrackableState.New;
-        }
-
-        public void MarkModified()
-        {
-            State = TrackableState.Modified;
-        }
-
-        public void MarkDeleted()
-        {
-            State = TrackableState.Deleted;
-        }
-
-        public void ResetState()
-        {
-            State = TrackableState.Unchanged;
+            return DomainManager.Create<T>();
         }
     }
 }

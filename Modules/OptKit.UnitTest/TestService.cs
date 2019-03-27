@@ -7,9 +7,9 @@ namespace OptKit.UnitTest
 {
     public class TestService : RemoteService
     {
-        public virtual Model ReturnMethod(string code)
+        public virtual Model ReturnWithArgumentsMethod(string code, int? qty, int? nullValue)
         {
-            return new Model { StringProperty = code };
+            return new Model { StringProperty = code, NullableIntProperty = qty };
         }
 
         public virtual void VoidMethod()

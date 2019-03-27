@@ -19,10 +19,15 @@ namespace OptKit.Domain
         /// <summary>
         /// 属性列表
         /// </summary>
-        IReadOnlyList<IProperty> Properties { get; }
+        IReadOnlyCollection<IProperty> Properties { get; }
 
         /// <summary>
-        /// 查找属性，找不到返回 null 值
+        /// 数据属性，非计算属性<see cref="ICaculateProperty"/>
+        /// </summary>
+        IReadOnlyCollection<IProperty> DataProperties { get; }
+
+        /// <summary>
+        /// 查找属性，找不到返回null值
         /// </summary>
         /// <param name="proprtyName">属性名称</param>
         /// <param name="ignoreCase">是否忽略属性名称大小写</param>
@@ -46,7 +51,7 @@ namespace OptKit.Domain
         {
             var property = container.Find(propertyName, ignoreCase);
             if (property == null)
-                throw new PropertyNotFoundException(Resources.TypePropertyNotFound.FormatArgs(propertyName, container.OwnerType.GetQualifiedName()));
+                throw new PropertyNotFoundException(Resources.TypePropertyNotFound.FormatArgs(propertyName, container.OwnerType?.GetQualifiedName()));
             return property;
         }
     }

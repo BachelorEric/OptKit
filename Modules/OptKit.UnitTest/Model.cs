@@ -10,5 +10,7 @@ namespace OptKit.UnitTest
         public object Id { get; set; }
 
         public string StringProperty { get; set; }
+
+        public int? NullableIntProperty { get; set; }
     }
 }

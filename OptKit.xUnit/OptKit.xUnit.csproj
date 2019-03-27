@@ -33,7 +33,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Modules\OptKit.Rbac\OptKit.Rbac.csproj" />
     <ProjectReference Include="..\Modules\OptKit.UnitTest\OptKit.UnitTest.csproj" />
-    <ProjectReference Include="..\OptKit.Primitives\OptKit.Primitives.csproj" />
     <ProjectReference Include="..\OptKit\OptKit.csproj" />
   </ItemGroup>
 

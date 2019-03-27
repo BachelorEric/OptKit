@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace OptKit.ComponentModel
+namespace OptKit
 {
     /// <summary>
     /// 标签标记

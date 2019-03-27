@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace OptKit.xUnit.Domain
+namespace OptKit.UnitTest
 {
     public class User : Entity<double>
     {

@@ -106,10 +106,6 @@
       <Project>{4e0ddc28-2afb-418f-9805-8cbe086747aa}</Project>
       <Name>OptKit.Log4Net</Name>
     </ProjectReference>
-    <ProjectReference Include="..\OptKit.Primitives\OptKit.Primitives.csproj">
-      <Project>{88f988d8-3f1b-410b-b3f1-81333464a47f}</Project>
-      <Name>OptKit.Primitives</Name>
-    </ProjectReference>
     <ProjectReference Include="..\OptKit\OptKit.csproj">
       <Project>{6FC6AC62-09AF-42FE-8B7B-88ED3A8ABE5F}</Project>
       <Name>OptKit</Name>

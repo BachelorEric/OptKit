@@ -1,18 +1,27 @@
-﻿using System;
+﻿using OptKit.Domain;
+using OptKit.UnitTest;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
 namespace OptKit.xUnit.Domain
 {
-    public class EntityTest
+    public class EntityTest : IClassFixture<AppInit>
     {
-        [Fact]
-        public void DomainFactory()
+        public EntityTest(AppInit app)
         {
-            new OptKit.Primitives.Module().Init(null);
-            var usr = OptKit.Domain.DomainFactory.Create<User>();
-            usr.Name = "Test Name";
+
+        }
+
+        [Fact]
+        public void ModelProperty()
+        {
+            var m = Entity.Create<ModelB>();
+            m.Name = "NewName";
+            m.Qty = 1.2;
+            Assert.Equal("NewName", m.Name);
+            Assert.Equal(1.2, m.Qty);
         }
     }
 }

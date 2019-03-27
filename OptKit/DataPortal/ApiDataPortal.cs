@@ -14,30 +14,32 @@ namespace OptKit.DataPortal
             ApiResponse response = new ApiResponse();
             response.Success = true;
             Type type = Type.GetType(request.ServiceName);
+            if (type == null)
+                throw new ArgumentException("找不到类型[{0}]".FormatArgs(request.ServiceName), nameof(request.ServiceName));
             var instance = Activator.CreateInstance(type);
             MethodInfo method = null;
             if (request.MethodGenericArguments.IsNotEmpty())
             {
                 var methods = type.GetMember(request.Method, MemberTypes.Method, BindingFlags.Instance | BindingFlags.Public).OfType<MethodInfo>();
-                foreach (var m in methods)
-                {
-                    if (m.IsGenericMethod)
-                    {
-                        var args = m.GetGenericArguments();
-                        if(args.Length == request.MethodGenericArguments.Length)
-                        {
-                            method = m.MakeGenericMethod(request.MethodGenericArguments.Select(p => GetType(p)).ToArray());
-                            break;
-                        }
-                    }
-                }
+                method = methods.Where(p => p.IsGenericMethod
+                    && p.GetGenericArguments().Length == request.MethodGenericArguments.Length
+                    && p.GetParameters().Length == request.ArgumentTypes.Length)
+                    .FirstOrDefault()?.MakeGenericMethod(request.MethodGenericArguments.Select(p => GetType(p)).ToArray());
             }
             else
             {
                 method = type.GetMethod(request.Method, request.ArgumentTypes.Select(p => GetType(p)).ToArray());
             }
 
-            response.Data = method.Invoke(instance, request.Arguments);
+            if (method == null)
+                throw new ArgumentException("找不到类型[{0}]的方法[{1}]".FormatArgs(request.ServiceName, request.Method), nameof(request.Method));
+            object[] args = new object[request.Arguments.Length];
+            var parameters = method.GetParameters();
+            for (int i = 0; i < request.Arguments.Length; i++)
+            {
+                args[i] = request.Arguments[i].ConvertTo(parameters[i].ParameterType);
+            }
+            response.Data = method.Invoke(instance, args);
             return response;
         }
 

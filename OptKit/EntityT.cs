@@ -1,8 +1,9 @@
-﻿using System;
+﻿using OptKit.Domain;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace OptKit.Domain
+namespace OptKit
 {
     /// <summary>
     /// 实体，主键的类型为<see cref="Key"/>

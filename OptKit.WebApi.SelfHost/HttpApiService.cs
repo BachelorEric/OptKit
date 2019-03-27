@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OptKit.Runtime;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,28 +15,31 @@ namespace OptKit.WebApi.SelfHost
     {
         Timer timer;
         HttpSelfHostServer server;
+        ServerApp app;
 
         public HttpApiService()
         {
-            var config = new HttpSelfHostConfiguration(RT.Config.Get("HostUrl", "http://localhost:888")); 
+            var config = new HttpSelfHostConfiguration(RT.Config.Get("OptKit.HostUrl", "http://localhost:888"));
             config.Routes.MapHttpRoute("API Default", "api/{controller}/{action}");
             server = new HttpSelfHostServer(config);
+            app = new ServerApp();
         }
 
         public bool Start(HostControl hostControl)
         {
-            RT.Logger.Info("WebApi Host starting...");
+            app.Logger.Info("WebApi Host starting...");
             hostControl.RequestAdditionalTime(TimeSpan.FromSeconds(10));
+            app.Startup();
             server.OpenAsync().Wait();
             RegisterToMainHost();
             Console.WriteLine("WebApi Host started");
-            RT.Logger.Info("WebApi Host started");
+            app.Logger.Info("WebApi Host started");
             return true;
         }
 
         void RegisterToMainHost()
         {
-            var section = RT.Config.GetSection("Cluster");
+            var section = RT.Config.GetSection("OptKit.Cluster");
             var masters = section.GetList<string>("MasterHosts");
             if (masters.Any())
             {
@@ -61,6 +65,7 @@ namespace OptKit.WebApi.SelfHost
         {
             server.CloseAsync().Wait();
             server.Dispose();
+            app.Stop();
             return true;
         }
     }

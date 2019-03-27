@@ -14,7 +14,7 @@ namespace OptKit.Services
 
         public void Intercept(IInvocation invocation)
         {
-            if (RT.DataPortalMode == DataPortal.DataPortalMode.Local || invocation.TargetType.IsDefined(typeof(LocalAttribute)) || invocation.Method.IsDefined(typeof(LocalAttribute)))
+            if (RT.Environment.DataPortalMode == DataPortalMode.Local || invocation.TargetType.IsDefined(typeof(LocalAttribute)) || invocation.Method.IsDefined(typeof(LocalAttribute)))
             {
                 invocation.Proceed();
                 return;

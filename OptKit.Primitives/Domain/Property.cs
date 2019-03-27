@@ -11,7 +11,5 @@ namespace OptKit.Primitives.Domain
         public Type PropertyType { get; set; }
         public Type OwnerType { get; set; }
         public Type DeclareType { get; set; }
-
-        public IPropertyMeta Meta => throw new NotImplementedException();
     }
 }

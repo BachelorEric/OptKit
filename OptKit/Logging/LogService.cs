@@ -11,11 +11,6 @@ namespace OptKit.Logging
     /// </summary>
     public static class LogService
     {
-        /// <summary>
-        /// Default Logger named app_logger
-        /// </summary>
-        public static ILog Logger { get; private set; } = GetLogger("app_logger");
-
         static ILoggerFactoryAdapter factory;
 
         static ILoggerFactoryAdapter Factory
@@ -24,7 +19,7 @@ namespace OptKit.Logging
             {
                 if (factory == null)
                 {
-                    var adapter = RT.Config.Get<string>("loggerFactoryAdapter");
+                    var adapter = RT.Config.Get<string>("LoggerFactoryAdapter");
                     if (adapter.IsNotEmpty())
                     {
                         var type = Type.GetType(adapter);
@@ -43,7 +38,7 @@ namespace OptKit.Logging
         public static void SetFactory(ILoggerFactoryAdapter loggerFactoryAdapter)
         {
             factory = loggerFactoryAdapter;
-            Logger = GetLogger("app_logger");
+            RT.Logger = GetLogger("app_logger");
         }
 
         /// <summary>

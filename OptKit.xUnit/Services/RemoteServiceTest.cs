@@ -25,10 +25,10 @@ namespace OptKit.xUnit.Services
         }
 
         [Fact]
-        public void ReturnMethod()
+        public void ReturnWithArgumentsMethod()
         {
             var service = RT.Service.Resolve<TestService>();
-            var result = service.ReturnMethod("string");
+            var result = service.ReturnWithArgumentsMethod("string", 3, null);
         }
 
         [Fact]
