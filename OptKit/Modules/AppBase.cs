@@ -2,6 +2,7 @@
 using OptKit.Logging;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace OptKit.Modules
@@ -40,22 +41,22 @@ namespace OptKit.Modules
         void InitModules()
         {
             var modules = RT.GetModules();
-            //先执行服务模块，再执行界面模块
+            var instances = modules.Where(p => p.ModuleType != null).Select(p => Activator.CreateInstance(p.ModuleType) as IModule).ToList();
             foreach (var module in modules)
             {
-                if (module.ModuleType.IsSubclassOf(typeof(ServiceModule)))
-                {
-                    var m = Activator.CreateInstance(module.ModuleType) as IModule;
-                    m.Init(this);
-                }
+                foreach (var type in module.Assembly.GetTypes())
+                    instances.ForEach(p => p.OnTypeFound(module, type));
             }
-            foreach (var module in modules)
+            //先执行服务模块，再执行界面模块
+            foreach (var module in instances)
             {
-                if (module.ModuleType.IsSubclassOf(typeof(UIModule)))
-                {
-                    var m = Activator.CreateInstance(module.ModuleType) as IModule;
-                    m.Init(this);
-                }
+                if (module is ServiceModule)
+                    module.Init(this);
+            }
+            foreach (var module in instances)
+            {
+                if (!(module is ServiceModule))
+                    module.Init(this);
             }
         }
 

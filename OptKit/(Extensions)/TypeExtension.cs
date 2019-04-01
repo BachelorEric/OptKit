@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime;
 using System.Text;
+using System.Linq;
 
 namespace System
 {
@@ -14,37 +15,28 @@ namespace System
         /// 获取继承层次列表，从子类到基类
         /// </summary>
         /// <param name="from">From.</param>
-        /// <param name="exceptTypes">The except types.</param>
+        /// <param name="stopAt">The except types.</param>
         /// <returns></returns>
-        public static IEnumerable<Type> GetHierarchy(this Type from, params Type[] exceptTypes)
+        public static IEnumerable<Type> GetHierarchy(this Type from, params Type[] stopAt)
         {
-            var needExcept = exceptTypes.Length > 0;
+            var needExcept = stopAt.Length > 0;
 
             Type current = from;
-            while (current != null && (!needExcept || !InExcept(current, exceptTypes)))
+            while (current != null && (!needExcept || !IsStop(current, stopAt)))
             {
                 yield return current;
                 current = current.BaseType;
             }
         }
 
-        static bool InExcept(Type current, Type[] exceptTypes)
+        static bool IsStop(Type current, Type[] stopAt)
         {
-            for (int i = 0, c = exceptTypes.Length; i < c; i++)
+            for (int i = 0, c = stopAt.Length; i < c; i++)
             {
-                var exceptType = exceptTypes[i];
-
-                //如果是泛型定义，则需要 current 类型是这个泛型的实例也可以。
-                if (exceptType.IsGenericTypeDefinition)
-                {
-                    if (current.IsGenericType && current.GetGenericTypeDefinition() == exceptType) return true;
-                }
-                else
-                {
-                    if (exceptType == current) return true;
-                }
+                var t = stopAt[i];
+                if (t == current) return true;
+                if (t.IsGenericTypeDefinition && current.IsGenericType && current.GetGenericTypeDefinition() == t) return true;
             }
-
             return false;
         }
 
@@ -85,6 +77,10 @@ namespace System
             {
                 if (currentType.IsGenericType && currentType.GetGenericTypeDefinition() == genericTypeDefinition)
                     return currentType;
+                var interfaces = currentType.GetInterfaces();
+                foreach (var i in interfaces)
+                    if (i.IsGenericType && i.GetGenericTypeDefinition() == genericTypeDefinition)
+                        return i;
                 currentType = currentType.BaseType;
             }
             return null;

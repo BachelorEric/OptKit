@@ -18,7 +18,7 @@ namespace OptKit.Modules
         /// <summary>
         /// 加载顺序
         /// </summary>
-        public int Index { get; set; } = ModuleIndex.Main;
+        public int Level { get; set; } = ModuleLevel.Main;
 
         /// <summary>
         /// 构造<see cref="ModuleInfoAttribute"/>实例

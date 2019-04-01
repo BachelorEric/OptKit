@@ -13,7 +13,7 @@ namespace OptKit.UnitTest
         /// <summary>
         /// 计数
         /// </summary>
-        [Label("计数A")]
+        [Caption("计数A")]
         public static readonly IProperty NameProperty = P<ModelA>.Register("CountA", typeof(int), typeof(ModelAExt));
     }
 
@@ -22,7 +22,7 @@ namespace OptKit.UnitTest
         /// <summary>
         /// 计数
         /// </summary>
-        [Label("计数B")]
+        [Caption("计数B")]
         public static readonly IProperty NameProperty = P<ModelB>.Register("CountB", typeof(int), typeof(ModelBExt));
     }
 }

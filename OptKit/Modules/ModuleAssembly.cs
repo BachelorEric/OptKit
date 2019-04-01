@@ -10,10 +10,10 @@ namespace OptKit.Modules
     /// </summary>
     public class ModuleAssembly
     {
-        public ModuleAssembly(Assembly assembly, int moduleIndex, Type moduleType)
+        public ModuleAssembly(Assembly assembly, int level, Type moduleType)
         {
             ModuleType = moduleType;
-            ModuleIndex = moduleIndex;
+            Level = level;
             Assembly = assembly;
         }
 
@@ -27,22 +27,20 @@ namespace OptKit.Modules
         /// </summary>
         public Assembly Assembly { get; }
 
-        internal int ModuleIndex { get; }
+        /// <summary>
+        /// 模块声明的顺序
+        /// </summary>
+        internal int Level { get; }
 
         /// <summary>
         /// 本属性表示模块在所有模块中的启动索引号。
         /// 索引号表示了模块的启动优先级，索引号越小，越先被启动。
         /// 该优先级的计算方式为：
         /// 
-        /// 1. 所有 DomainModule 的索引号全部少于所有的 UIModule 的索引号；
-        /// 2. 接着按照 SetupLevel 进行排序，越小的 SetupLevel 对应越小的索引号。
-        /// 3. 对于 SetupLevel 相同的模块，则根据引用关系对模块进行排序，引用其它模块越少的模块，对应的索引号更小。
+        /// 1. 所有 ServiceModule 的索引号全部少于所有的 UIModule 的索引号；
+        /// 2. 接着按照 ModuleIndex 进行排序，越小的 ModuleIndex 对应越小的索引号。
+        /// 3. 对于 ModuleIndex 相同的模块，则根据引用关系对模块进行排序，引用其它模块越少的模块，对应的索引号更小。
         /// </summary>
         public int Index { get; internal set; }
-    }
-
-    internal class EmptyModule : IModule
-    {
-        public void Init(IApp app) { }
     }
 }

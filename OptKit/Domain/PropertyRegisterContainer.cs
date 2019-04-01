@@ -76,7 +76,7 @@ namespace OptKit.Domain
                         if (_container == null)
                         {
                             RunPropertyResigtry(OwnerType);
-                             RunClrPropertyResigtry(OwnerType);
+                            RunClrPropertyResigtry(OwnerType);
                             var container = new PropertyContainer(this);
                             container.CompileProperties();
                             _container = container;
@@ -93,11 +93,18 @@ namespace OptKit.Domain
                 throw new InvalidOperationException("声明属性的泛型类型 {0}，必须声明为 abstract，否则无法正常注册属性！".FormatArgs(entityType.FullName));
 
             //同时运行基类及它本身的所有静态构造函数
-            var types = entityType.GetHierarchy(typeof(Entity), typeof(object)).ToArray();
+            var types = entityType.GetHierarchy(typeof(Entity), typeof(DomainObject)).ToArray();
             for (int i = types.Length - 1; i >= 0; i--)
             {
                 var type = types[i];
                 System.Runtime.CompilerServices.RuntimeHelpers.RunClassConstructor(type.TypeHandle);
+                var fields = type.GetFields(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+                foreach (var field in fields)
+                {
+                    var p = field.GetValue(null) as Property;
+                    if (p != null)
+                        p.Attributes = field.GetCustomAttributes().ToArray();
+                }
             }
         }
 
@@ -110,14 +117,15 @@ namespace OptKit.Domain
                 if (!property.GetMethod.IsFinal && property.GetMethod.IsVirtual)
                 {
                     var container = GetOrCreateRegisterContainer(property.DeclaringType);
-                    if (!container.Properties.Any(p => p.OwnerType == property.DeclaringType && p.PropertyName == property.Name))
+                    if (!container.Properties.Any(p => p.OwnerType == property.DeclaringType && p.Name == property.Name))
                     {
-                        var pt = typeof(ValueProperty<>).MakeGenericType(property.PropertyType);
+                        var pt = typeof(DataProperty<>).MakeGenericType(property.PropertyType);
                         var p = Activator.CreateInstance(pt) as Property;
                         p.OwnerType = property.DeclaringType;
                         p.DeclareType = property.DeclaringType;
-                        p.PropertyName = property.Name;
+                        p.Name = property.Name;
                         p.PropertyType = property.PropertyType;
+                        p.Attributes = property.GetCustomAttributes().ToArray();
                         RegisterProperty(p);
                     }
                 }

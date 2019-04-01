@@ -10,5 +10,9 @@ namespace OptKit.Rbac
         public void Init(IApp app)
         {
         }
+
+        public void OnTypeFound(ModuleAssembly module, Type type)
+        {
+        }
     }
 }

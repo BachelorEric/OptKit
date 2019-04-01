@@ -23,5 +23,10 @@ namespace OptKit.xUnit.Domain
             Assert.Equal("NewName", m.Name);
             Assert.Equal(1.2, m.Qty);
         }
+
+        public void ParentChild()
+        {
+
+        }
     }
 }

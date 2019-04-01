@@ -5,11 +5,22 @@ using System.Text;
 namespace OptKit
 {
     /// <summary>
-    /// 表影射标记
+    /// 表映射标记
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Class)]
     public class TableAttribute : Attribute
     {
+        public TableAttribute() { }
+
+        public TableAttribute(string tableName)
+        {
+            TableName = tableName;
+        }
+
+        public TableAttribute(Type sqlViewType)
+        {
+            SqlViewType = sqlViewType;
+        }
         /// <summary>
         /// 表名
         /// </summary>
@@ -19,15 +30,8 @@ namespace OptKit
         /// </summary>
         public string SqlView { get; set; }
         /// <summary>
-        /// SQL视图查询生成器
+        /// SQL视图查询生成器, 需要实现<see cref="ISqlView"/>
         /// </summary>
-        public Type ViewProvider { get; set; }
-
-        public TableAttribute() { }
-
-        public TableAttribute(string tableName)
-        {
-            TableName = tableName;
-        }
+        public Type SqlViewType { get; set; }
     }
 }

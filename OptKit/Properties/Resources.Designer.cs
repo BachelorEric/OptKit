@@ -70,6 +70,15 @@ namespace OptKit.Properties {
         }
         
         /// <summary>
+        ///   查找类似 没有注册名为{0}的DbProviderFactory 的本地化字符串。
+        /// </summary>
+        internal static string DbProviderFactoryNotFound {
+            get {
+                return ResourceManager.GetString("DbProviderFactoryNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 {0} 必须是泛型定义 的本地化字符串。
         /// </summary>
         internal static string MustBeGenericTypeDefinition {

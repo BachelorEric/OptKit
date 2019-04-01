@@ -16,9 +16,10 @@ namespace OptKit.Domain.Data
 
         void CheckProperty(IProperty property)
         {
+            Check.NotNull(property, nameof(property));
             var index = property.CompiledIndex;
             if (index < 0 || index >= _values.Length)
-                throw new IndexOutOfRangeException("属性[{0}]CompiledIndex值[{1}]超索引范围".FormatArgs(property.PropertyName, index));
+                throw new IndexOutOfRangeException("属性[{0}]CompiledIndex值[{1}]超索引范围".FormatArgs(property.Name, index));
         }
 
         public bool Exists(IProperty property)

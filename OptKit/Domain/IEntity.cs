@@ -7,7 +7,7 @@ namespace OptKit.Domain
     /// <summary>
     /// 实体声明，实体是具有唯一主键<see cref="Id"/>的对象
     /// </summary>
-    public interface IEntity
+    public interface IEntity : IDomain
     {
         /// <summary>
         /// 主键

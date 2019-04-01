@@ -10,7 +10,8 @@ namespace OptKit.UnitTest
         /// <summary>
         /// 名称
         /// </summary>
-        [Label("名称")]
+        [Caption("名称")]
+        [Column]
         public static readonly IProperty<string> NameProperty = P<ModelA>.Register(e => e.Name);
 
         /// <summary>
@@ -23,5 +24,16 @@ namespace OptKit.UnitTest
         }
         #endregion
 
+
+
+        [Column]
+        public virtual int IntProperty { get; set; }
+
+        public virtual string A { get; set; }
+
+        public virtual string B { get; set; }
+
+        [Property(Expression = "A + B")]
+        public virtual string AB { get; set; }
     }
 }

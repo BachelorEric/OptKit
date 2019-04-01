@@ -120,6 +120,9 @@
   <data name="CannotConvertType" xml:space="preserve">
     <value>类型 {0} 不能转为 {1}</value>
   </data>
+  <data name="DbProviderFactoryNotFound" xml:space="preserve">
+    <value>没有注册名为{0}的DbProviderFactory</value>
+  </data>
   <data name="MustBeGenericTypeDefinition" xml:space="preserve">
     <value>{0} 必须是泛型定义</value>
   </data>

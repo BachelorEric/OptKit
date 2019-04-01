@@ -234,13 +234,13 @@ namespace System
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static string ToLabel(this Enum value)
+        public static string ToCaption(this Enum value)
         {
             if (value == null)
                 return null;
             var type = value.GetType();
             var fieldInfo = type.GetField(value.ToString());
-            return fieldInfo?.GetCustomAttribute<LabelAttribute>()?.Label;
+            return fieldInfo?.GetCustomAttribute<CaptionAttribute>()?.Caption;
         }
     }
 }

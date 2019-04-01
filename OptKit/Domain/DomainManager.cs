@@ -3,14 +3,20 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Reflection;
+using OptKit.Domain.Metadata;
 
 namespace OptKit.Domain
 {
+    /// <summary>
+    /// 领域模型管理器
+    /// </summary>
     public class DomainManager
     {
         static ProxyGenerator _proxyGenerator = new ProxyGenerator();
 
         static IInterceptor Interceptor { get; set; } = new DomainInterceptor();
+
+        public static DomainMetaContainer Domains { get; } = new DomainMetaContainer();
 
         /// <summary>
         /// 实体拦截器
